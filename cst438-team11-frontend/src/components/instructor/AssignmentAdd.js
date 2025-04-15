@@ -6,6 +6,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
+const GRADEBOOK_URL = "http://localhost:8081"
+
 // complete the code.  
 // instructor adds an assignment to a section
 // use mui Dialog with assignment fields Title and DueDate
@@ -33,18 +35,37 @@ const AssignmentAdd = (props)  => {
         setAssignment({...assignment,  [event.target.name]:event.target.value})
     }
 
-    const onSave = () => {
-        //if (assignment.assignmentId==='') {setEditMessage("AssignmentId can not be blank");}
-        if (assignment.title==='') {
-            setEditMessage("Title can not be blank");
-        } else if ( isNaN(Date.parse(assignment.dueDate))) {
-            setEditMessage("DueDate must be a valid date");
-        } else {
-            setAssignment({...assignment, secNo: props.secNo});
-            props.save(assignment);
-            editClose();
+    const onSave = async () => {
+    if (assignment.title === '') {
+      setEditMessage("Title can not be blank");
+    } else if (isNaN(Date.parse(assignment.dueDate))) {
+      setEditMessage("DueDate must be a valid date");
+    } else {
+      try {
+        const response = await fetch(`${GRADEBOOK_URL}/assignments`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: assignment.title,
+            dueDate: assignment.dueDate,
+            secNo: props.secNo,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Error ${response.status} - Could not add assignment`);
         }
+
+        setEditMessage("Assignment added successfully!");
+        editClose();
+
+      } catch (error) {
+        setEditMessage(`Failed to save assignment: ${error.message}`);
+      }
     }
+  };
 
     return (
         <>
