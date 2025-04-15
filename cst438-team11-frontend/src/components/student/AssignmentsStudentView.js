@@ -9,7 +9,8 @@ const AssignmentsStudentView = () => {
   const [loading, setLoading] = useState(false);
 
   const studentId = 3; // Hardcoded for now
-  const BACKEND_URL = 'http://localhost:8080'; // Backend base URL
+  const BACKEND_URL = "http://localhost:8081"; // Gradebook service
+
 
   const fetchAssignments = async () => {
     try {
