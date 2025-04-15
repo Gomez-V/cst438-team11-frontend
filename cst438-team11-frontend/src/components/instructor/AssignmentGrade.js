@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {SERVER_URL} from "../../Constants";
 import {useLocation} from "react-router-dom";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -8,6 +7,8 @@ import DialogContent from "@mui/material/DialogContent";
 import TextField from "@mui/material/TextField";
 import DialogActions from "@mui/material/DialogActions";
 import AssignmentUpdate from "./AssignmentUpdate";
+
+const GRADEBOOK_URL = "http://localhost:8081"
 
 // instructor enters students' grades for an assignment
 // fetch the grades using the URL /assignments/{id}/grades
