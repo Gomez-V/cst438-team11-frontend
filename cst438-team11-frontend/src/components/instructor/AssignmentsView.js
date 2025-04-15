@@ -3,11 +3,11 @@ import {useLocation} from 'react-router-dom'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import Button from '@mui/material/Button';
-import {SERVER_URL} from '../../Constants';
 import AssignmentUpdate from "../instructor/AssignmentUpdate";
 import AssignmentAdd from "../instructor/AssignmentAdd";
 import AssignmentGrade from "./AssignmentGrade";
 
+const GRADEBOOK_URL = "http://localhost:8081"
 // instructor views assignments for their section
 // use location to get the section value 
 // 
